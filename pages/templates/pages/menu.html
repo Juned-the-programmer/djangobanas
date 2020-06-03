@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <a class="navbar-brand" href="#">BANAS WATER</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        {% if request.user.is_superuser %}
+        <a class="nav-link" href="{% url 'dailyentryadmin' %}">DAILY ENTRY</a>
+        {% else %}
+        <a class="nav-link" href="{% url 'dailyentry' %}">DAILY ENTRY</a>
+        {% endif %}
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          SERVICES
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        {% if request.user.is_superuser %}
+          <a class="dropdown-item" href="{% url 'billadmin' %}">DASHBOARD</a>
+        {% else %}        
+          <a class="dropdown-item" href="{% url 'pendingbill' %}">PENDING BILL</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'paidbill' %}">PAID BILL</a>
+        {% endif %}
+        </div>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}">ABOUT US</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+    {% if user.is_authenticated %}
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">HELLO {{user.username}} <span class="sr-only">(current)</span></a>
+      </li>
+      {% if request.user.is_superuser %}
+        <li class="nav-item active">
+        <a class="nav-link" href="/admin">ADMIN PANEL<span class="sr-only">(current)</span></a>
+      </li>
+      {% endif %}
+    </ul>  
+       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" formaction="{% url 'logout' %}">LOGOUT</button>&nbsp;&nbsp;&nbsp;&nbsp;
+      </li>
+      {% else %} 
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" formaction="{% url 'login' %}">LOGIN</button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" formaction="{% url 'signup' %}">SIGNUP</button>&nbsp;&nbsp;&nbsp;&nbsp;
+      {% endif %}
+    </form>
+  </div>
+</nav>

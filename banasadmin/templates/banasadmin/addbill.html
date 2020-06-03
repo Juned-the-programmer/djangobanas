@@ -1,0 +1,56 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}CREATE BILL
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5"></div>
+<div class="row mx-1 my-1">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                CREATE BILL
+            </div>
+            <div class="card-body m-3">
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">NAME</label>
+                        <input type="text" class="form-control" id="name"  value="{{getbilldata.name}}" name="name" placeholder="Enter the Name Here">
+                    </div>
+                    <div class="form-group">
+                        <label for="cooler">COOLER</label>
+                        <input type="text" class="form-control" id="cooler" value="{{getbilldata.cooler}}"  name="cooler" placeholder="Enter the quantity of cooler">
+                    </div>
+                    <div class="form-group">
+                        <label for="rate">RATE</label>
+                        <input type="text" class="form-control" id="rate" value="{{getbilldata.rate}}" name="rate"  placeholder="Enter the rate">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">AMOUNT</label>
+                        <input type="text" class="form-control" id="amount" name="amount"  placeholder="Enter the amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="pending">PENDING AMOUNT</label>
+                        <input type="text" class="form-control" id="pending" value="{{getbilldata.pending_amount}}" name="pending" placeholder="Enter the pending amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="subtotal">SUBTOTAL</label>
+                        <input type="text" class="form-control" id="subtotal" name="subtotal" placeholder="Enter the subtotal">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+{% endblock content %}

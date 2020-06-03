@@ -1,0 +1,62 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/Footer-Dark.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/Features-clean.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Team-clean.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dh-row-titile-text-image-right-1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Newsletter-Subscription-Form.css' %}">
+    <title>
+    {% block title %}
+    {% endblock title %}
+    </title>
+</head>
+  <body>
+    {% include 'pages/menu.html' %}
+    
+    {% block content %}
+
+    {% endblock content %}
+
+    {% block footer %}
+       <div class="footer-dark mt-5"> 
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>ADDRESS</h3>
+                        <p>Patel compund , opp. Anmol Nagar , Pirojpura road , chhapi&nbsp;</p>
+                    </div>
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>CONTACT</h3>
+                        <p>Conatct No := 7359280121</p>
+                    </div>
+                    <div class="col-md-6 item text">
+                        <h3>BANAS WATER</h3>
+                        <p>We are Providing high quality purify water to drink safe and pure natural water&nbsp;</p>
+                    </div>
+                </div>
+                <p class="copyright">Banas Water © 2017</p>
+            </div>
+        </footer>
+    </div>
+    {% endblock footer %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery.min.js' %}" ></script>
+    <script src="{% static 'js/popper.min.js' %}" ></script>
+    <script src="{% static 'js/bootstrap.min.js' %}" ></script>
+    <script src="{% static 'js/custom.js' %}" ></script>
+  </body>
+</html>

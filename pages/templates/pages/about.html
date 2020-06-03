@@ -1,0 +1,50 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}ABOUT US
+{% endblock title %}
+{% load static %}
+{% block content %}
+  <div id="empresa" style="padding:20px;margin:1px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-7 col-lg-7">
+                    <h1>WHO WE ARE ?</h1>
+                    <p>We the banas water which provide the best high quality mineral water to our loyal customer in time.We provide cool water to the customers and give pure cold water to the our customers</p>
+                </div>
+                <div class="col-sm-6 col-md-5 col-lg-5"><img class="img-fluid" src="{% static 'img/about1.png' %}"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" style="filter: contrast(124%);color: rgb(6,52,98);">
+                    <h1 class="text-center">OUR PROVIDED SERVICES</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div></div>
+    <div class="text-center" style="margin: 30px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8"><img src="{% static 'img/about2.jpg' %}"></div>
+                <div class="col-md-4">
+                    <h1>PROVIDE FAST DELIVERY</h1>
+                    <p>Providing Fast Delivery As We can to the customers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8"><img src="{% static 'img/about3.jpg' %}"></div>
+                <div class="col-md-4">
+                    <h1>PACKING MACHINE</h1>
+                    <p>Automate Packing Machine to the Bottle</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

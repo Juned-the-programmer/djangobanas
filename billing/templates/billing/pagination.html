@@ -1,0 +1,64 @@
+{% extends 'pages/base.html' %}
+
+
+{% block title %}BILL{% endblock title %}
+
+{% block content %}
+{% include 'billing/message.html' %}
+
+<div class="container mt-5">
+
+    <nav aria-label="breadcrumb" class="mb-4 ">
+        <ol class="breadcrumb  bg-dark" style="height: 53px;">
+          <li class="breadcrumb-item active text-white " aria-current="page">
+        {% block table_title %}
+        {% endblock table_title %}
+        <li class="breadcrumb-item active text-white " aria-current="page">
+            <a class="text-white" href="{% block addlink %}
+            {% endblock addlink %}"><i class="fas fa-plus"></i>{% block addlinktitle %}
+            {% endblock addlinktitle %}</a>
+        </ol>
+
+ 
+      </nav>
+
+      <div class="table-responsive">
+    <table class="table table-striped thead-dark table-bordered table">
+        <thead class="thead-dark">
+          <tr>
+{% block table_header %}
+{% endblock table_header %}
+          </tr>
+        </thead>
+        <tbody>
+            {% for a in current_page %}
+          <tr>
+{% block table_data %}
+{% endblock table_data %}
+
+          </tr>
+          {% endfor %}
+         </tbody>
+      </table>
+    </div>
+      {% if is_paginated %}
+      <nav class="my-5">
+        <ul class="pagination ">
+          {% if current_page.has_previous %}
+          <li class="page-item "><a class="page-link" href="?page=1">First</a></li>
+          <li class="page-item "><a class="page-link" href="?page={{ current_page.previous_page_number }}"><<</a></li>
+          {% endif %}
+          {% for page in paginator.page_range %}
+          <li class="page-item {% if page == current_page.number %}active{% endif %}">
+            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+          </li>
+          {% endfor %}
+          {% if current_page.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ current_page.next_page_number }}">>></a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ current_page.paginator.num_pages }}">Last</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+  {% endif %}
+</div>
+{% endblock content %}

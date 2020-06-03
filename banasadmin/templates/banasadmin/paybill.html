@@ -1,0 +1,49 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}PAY BILL
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5"></div>
+<div class="row mx-1 my-1">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                PAY BILL
+            </div>
+            <div class="card-body m-3">
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">NAME</label>
+                        <input type="text" class="form-control" id="name" value="{{editdata.name}}" name="name" placeholder="Enter the Name Here">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">AMOUNT</label>
+                        <input type="text" class="form-control" id="amount" value="{{editdata.subtotal}}" name="amount" placeholder="Enter the amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="pay">PAY AMOUNT</label>
+                        <input type="text" class="form-control" id="pay" name="paidamount"  placeholder="Enter the pay amount">
+                    </div>
+                    {% comment %} <div class="form-group">
+                        <label for="pendingamount">PENDING AMOUNT</label>
+                        <input type="text" class="form-control" id="pendingamount" value={{editdata.pending_amount}} name="pendingamount" placeholder="Enter the pendingamount">
+                    </div> {% endcomment %}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" name="pay">PAY</button>
+                        {% comment %} <button type="submit" class="btn btn-primary" name="clearaccount">CLEAR ACCOUNT</button> {% endcomment %}
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+{% endblock content %}

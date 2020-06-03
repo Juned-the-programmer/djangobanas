@@ -1,0 +1,31 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}DAILY ENTRY
+{% endblock title %}
+
+{% block content %}
+
+<div class="newsletter-subscribe">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">DAILY ENTRY OF COOLER</h2>
+                <p class="text-center">HERE YOU HAVE TO ENTER THE DAILY BASIS COOLER SO CAN SEE THIS COOLER AT THE TIME OF PAYMENT.HOW MANY COOLER YOU HAVE BOUGHT FROM US.<br></p>
+            </div>
+            <form class="form-inline" method="post">
+            {% csrf_token %}
+                <div class="form-group">
+                    <select class="form-control">
+                    {% for a in data%}
+                        <option value="{{a.name}}">
+                        {{a.name}}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </div>&nbsp;&nbsp;
+                <div class="form-group"><input class="form-control" id="cooler" name="cooler" type="text" placeholder="Your Cooler"></div>&nbsp;&nbsp;
+                <div class="form-group"><button class="btn btn-primary" type="submit">ADD COOLER</button></div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

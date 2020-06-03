@@ -1,0 +1,30 @@
+{% extends 'banasadmin/pagination.html' %}
+
+{% block title %}PENDING BILLS
+{% endblock title %}
+
+{% block table_title %}PENDING BILLS
+{% endblock table_title %}
+
+{% block table_header %}
+    <th>#</th>
+    <th>NAME</th>
+    <th>COOLER</th>
+    <th>RATE</th>
+    <th>AMOUNT</th>
+    <th>PENDING</th>
+    <th>SUBTOTAL</th>
+    <th>TASK</th>
+{% endblock table_header %}
+
+{% block table_data %}
+    <td>{{ current_page.start_index|add:forloop.counter0 }}</td>
+    <td>{{a.name}}</td>
+    <td>{{a.cooler}}</td>
+    <td>{{a.rate}}</td>
+    <td>{{a.amount}}</td>
+    <td>{{a.pending_amount}}</td>
+    <td>{{a.subtotal}}</td>
+    <td>{{a.task}}</td>
+    
+{% endblock table_data %}

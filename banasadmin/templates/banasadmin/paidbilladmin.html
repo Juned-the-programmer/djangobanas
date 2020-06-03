@@ -1,0 +1,30 @@
+{% extends 'banasadmin/pagination.html' %}
+
+{% block title %}PAID BILL
+{% endblock title %}
+
+{% block tabletitle %}PAID BILLS
+{% endblock tabletitle %}
+
+{% block table_header %}
+    <th>#</th>
+    <th>NAME</th>
+    <th>AMOUNT</th>
+    <th>PAY</th>
+    <th>PENDING</th>
+    <th>DATE</th>
+{% endblock table_header %}
+
+{% block table_data %}
+    <td>{{ current_page.start_index|add:forloop.counter0 }}</td>
+    <td>{{a.name}}</td>
+    <td>{{a.amount}}</td>
+    <td>{{a.pay}}</td>
+    <td>{{a.pending}}</td>
+    <td>{{a.date_payed}}</td>
+    
+    {% comment %} <td class="text-center">
+        <a class="btn btn-primary" href="/banasadmin/paybill/{{a.id}}"><i class="far fa-edit"></i></a> 
+        <a class="btn btn-primary" href="/banasadmin/addbill/{{a.id}}"><i class="far fa-edit"></i></a> 
+    </td> {% endcomment %}
+{% endblock table_data %}

@@ -1,0 +1,88 @@
+{% extends 'pages/base.html' %}
+
+
+{% block title %}BILL{% endblock title %}
+
+{% block content %}
+{% include 'banasadmin/message.html' %}
+<div class=" py-3 text-white" style="background-color: #343534">
+      <h1>&nbsp;&nbsp;<center>BANAS WATER</center></h1>
+    </div>
+    <div class="bg-light p-3">
+     
+    <div class="row">
+       <div class="col-md-4">
+         <a href="{% url 'pendingadmin' %}" class="btn btn-success d-block font-weight-bold mb-3">
+          <i class="fas fa-plus"></i> &nbsp; PENDING BILLS</a>
+       </div> 
+       <div class="col-md-4">
+         <a href="{% url 'paidbilladmin' %}" class="btn btn-success d-block font-weight-bold mb-3">
+          <i class="fas fa-plus"></i> &nbsp; PAID BILLS</a>
+       </div> 
+       <div class="col-md-4">
+         <a href="{% url 'addcustomer' %}" class="btn btn-success d-block font-weight-bold mb-3">
+          <i class="fas fa-plus"></i> &nbsp;ADD USER</a>
+       </div>
+       <div class="col-md-4">
+       <form class="form-inline my-2 my-lg-0" method="GET">
+       {% csrf_token %}
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" value="{{request.get.q}}" aria-label="Search" name="q">
+    </form>
+    </div>
+    </div>
+  </div>
+
+<div class="container mt-5">
+
+    <nav aria-label="breadcrumb" class="mb-4 ">
+        <ol class="breadcrumb  bg-dark" style="height: 53px;">
+          <li class="breadcrumb-item active text-white " aria-current="page">
+          {% block table_title %}
+          {% endblock table_title %}
+          <li class="breadcrumb-item">
+          
+          </li>
+        </ol>
+
+ 
+      </nav>
+    <div class="table-responsive">
+    <table class="table table-striped thead-dark table-bordered table">
+        <thead class="thead-dark">
+          <tr>
+{% block table_header %}
+{% endblock table_header %}
+          </tr>
+        </thead>
+        <tbody>
+            {% for a in current_page %}
+          <tr>
+{% block table_data %}
+{% endblock table_data %}
+
+          </tr>
+          {% endfor %}
+         </tbody>
+      </table>
+    </div>
+      {% if is_paginated %}
+      <nav class="my-5">
+        <ul class="pagination ">
+          {% if current_page.has_previous %}
+          <li class="page-item "><a class="page-link" href="?page=1">First</a></li>
+          <li class="page-item "><a class="page-link" href="?page={{ current_page.previous_page_number }}"><<</a></li>
+          {% endif %}
+          {% for page in paginator.page_range %}
+          <li class="page-item {% if page == current_page.number %}active{% endif %}">
+            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+          </li>
+          {% endfor %}
+          {% if current_page.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ current_page.next_page_number }}">>></a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ current_page.paginator.num_pages }}">Last</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+  {% endif %}
+</div>
+{% endblock content %}
