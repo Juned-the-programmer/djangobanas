@@ -61,7 +61,7 @@ def dailyentry(request):
         if d in range(6,18):
             dailyEntry.save()
         else:
-             messages.error(request, 'Now you cannnot do entry on this')
+            messages.error(request, 'Now you cannnot do entry on this')
     return render(request,'billing/dailyentry.html',context)
 
 @login_required(login_url='login')
