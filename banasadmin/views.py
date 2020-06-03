@@ -142,9 +142,9 @@ def paybill(request,pk):
         BILL.pending_amount = c
         BILL.amount=0
         BILL.subtotal=c
-        BILL.task="paid"
         if BILL.pending_amount <= 50:
             BILL.pending_amount=0
+            BILL.task="paid"
         paidbill = Payment(
             name = name,
             amount = amount,
