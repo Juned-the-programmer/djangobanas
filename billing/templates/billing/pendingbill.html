@@ -27,7 +27,7 @@
     <td>{{a.subtotal}}</td>
     <td class="text-center">
         {% if a.task == "pending" %}
-            <a class="btn btn-primary" href="/banasadmin/paybill/{{a.id}}"><i class="far fa-credit-card"></i></a> 
+            <a class="btn btn-primary" href="/#/{{a.id}}"><i class="far fa-credit-card"></i></a> 
         {% else %} 
             {{a.task}}
         {% endif %}
