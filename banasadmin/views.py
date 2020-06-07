@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from pages.decoraters import *
 from django.contrib.auth.models import User,Group
 from django.db.models import Q
+from django.db.models import Sum,Min,Max,Avg
 # Create your views here.
 
 @login_required(login_url='login')
@@ -32,10 +33,19 @@ def billadmin(request):
         # context = {
         #     'pending_tasks': pending_tasks,
         # }
+    data = Bill.objects.aggregate(Sum('subtotal'))
+    pending = Bill.objects.aggregate(Sum('pending_amount'))
+    print(data['subtotal__sum'])
+    c = data['subtotal__sum']
+    b = pending['pending_amount__sum']
+    # c = result['subtotal__sum']
+    # print(c)
     context = {
         'current_page': current_page,
         'is_paginated': is_paginated,
-        'paginator': paginator
+        'paginator': paginator,
+        'c' : c ,
+        'b' : b
         # 'myfilter' : myfilter
     }
     return render(request, 'banasadmin/billadmin.html',context)
