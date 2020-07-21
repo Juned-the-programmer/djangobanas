@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
 from django.contrib import messages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,7 +26,7 @@ SECRET_KEY = '2rc@p4f(g66-mro5(vczi^%*)$(#9=@n7l_k%!jx(o-s1_@3o2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
@@ -108,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
-]
+    ]
 
 
 # Internationalization
@@ -137,5 +136,4 @@ STATICFILES_DIRS=(
 )
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+# Activate Django-Heroku.py
