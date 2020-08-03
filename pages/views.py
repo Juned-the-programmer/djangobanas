@@ -22,9 +22,12 @@ def signup(request):
         password1 = request.POST['pwd1']
         phoneno = request.POST['phoneno']
         route = request.POST['route']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
 
         if password==password1:
-            user = User.objects.create_user(username=username,password=password)
+            user = User.objects.create_user(username=username,password=password,first_name=first_name,last_name=last_name,email=email)
             user.save()
             group = Group.objects.get(name='customer')
             user.groups.add(group)
@@ -40,9 +43,9 @@ def signup(request):
             AddCustomer = Customer( 
                 name=username,
                 phone_no=phoneno,
-                route=route,
                 pwd = password,
-                pwd1 = password1
+                pwd1 = password1,
+                email=email
             )
             AddBill.save()
             AddCustomer.save()

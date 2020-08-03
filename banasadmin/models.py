@@ -15,7 +15,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User,null=True,on_delete=models.CASCADE)
     name =  models.CharField(max_length=100)
     phone_no = models.CharField(max_length=10)
-    route = models.CharField(max_length=100)
+    email = models.CharField(max_length=50,null=True,blank=True)
     pwd = models.CharField(max_length=100)
     pwd1 = models.CharField(max_length=100)
 

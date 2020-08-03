@@ -1,0 +1,27 @@
+{% extends 'banasadmin/pagination.html' %}
+
+{% block title %}Manage User
+{% endblock title %}
+
+{% block table_header %}
+    <th>#</th>
+    <th>USERNAME</th>
+    <th>NAME</th>
+    <th>PHONE NO</th>
+    <th>EMAIL</th>
+    <th>PASSWORD</th>
+    <th>MANAGE</th>
+{% endblock table_header %}
+
+{% block table_data %}
+    <td>{{ current_page.start_index|add:forloop.counter0 }}</td>
+    <td>{{a.user}}</td>
+    <td>{{a.name}}</td>
+    <td>{{a.phone_no}}</td>
+    <td>{{a.email}}</td>
+    <td>{{a.pwd}}</td>
+    <td>
+    <a class="btn btn-primary" href="/banasadmin/updateuser/{{a.id}}"> <i class="fas fa-pencil-square"></i> </a>
+    <a class="btn btn-primary" href="/banasadmin/delete/{{a.id}}"> <i class="fa fa-trash"></i> </a>
+    </td>
+{% endblock table_data %}

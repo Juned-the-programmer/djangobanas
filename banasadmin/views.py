@@ -7,6 +7,8 @@ from pages.decoraters import *
 from django.contrib.auth.models import User,Group
 from django.db.models import Q
 from django.db.models import Sum,Min,Max,Avg
+from datetime import datetime,date
+import datetime
 # Create your views here.
 
 @login_required(login_url='login')
@@ -53,6 +55,26 @@ def billadmin(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
 def dailyentryadmin(request):
+    today = datetime.datetime.now()
+    first = today.replace(day=1)
+    lastmonth = first - datetime.timedelta(days=31)
+    lstmonth = lastmonth.strftime("%Y-%m-%d")
+    billdata = DailyEntry.objects.filter(date_added__gte=lstmonth).order_by('-id')
+
+    paginator = Paginator(billdata, 5, orphans=0)
+
+    is_paginated = True if paginator.num_pages > 1 else False
+    page = request.GET.get('page') or 1 
+    try:
+        current_page = paginator.page(page)
+        # except:
+    except InvalidPage as e:
+        messages.error(request, str(e))
+        current_page = paginator.page(1)
+
+        # context = {
+        #     'pending_tasks': pending_tasks,
+        # }
     if request.method == 'POST':
         name = request.POST['name']
         cooler = request.POST['cooler']
@@ -64,9 +86,11 @@ def dailyentryadmin(request):
         dailyEntry.save()
 
     data = Customer.objects.all()
-    print(data)
     context = {
-        'data':data
+        'data':data,
+        'current_page': current_page,
+        'is_paginated': is_paginated,
+        'paginator': paginator
     }
     return render(request, 'banasadmin/dailyentryadmin.html',context)
 
@@ -76,9 +100,9 @@ def addcustomer(request):
     if request.method == 'POST':
         name = request.POST['name']
         phone_no = request.POST['phoneno']
-        route = request.POST['route']
         password = request.POST['pwd']
         password1 = request.POST['pwd1']
+        email = request.POST['email']
 
         if Customer.objects.filter(name=name).exists():
             messages.error(request, 'name already exists')
@@ -95,9 +119,9 @@ def addcustomer(request):
             AddCustomer = Customer( 
                 name=name,
                 phone_no=phone_no,
-                route=route,
                 pwd = password,
-                pwd1 = password1
+                pwd1 = password1,
+                email=email
             )
             # response = sendPostRequest(URL, 'BTAYN8KJCTSCCDIYW0CVXIUCC0F8XLSQ', '4K7G9XIOQIPNSTBF', 'stage', phone_no , 'banas water', 'THANKS FOR REGISTRATION IN THIS WEBSITE BANAS WATER' )
             user = User.objects.create_user(username=name,password=password)
@@ -193,9 +217,6 @@ def addbill(request,pk):
         name = request.POST['name']
         cooler = request.POST['cooler']
         rate = request.POST['rate']
-        amount = request.POST['amount']
-        pending_amount = request.POST['pending']
-        subtotal = request.POST['subtotal']
         task = "pending"
 
         createbill = Bill.objects.get(pk=pk)
@@ -203,9 +224,6 @@ def addbill(request,pk):
         createbill.name = name
         createbill.cooler=cooler
         createbill.rate=rate   
-        createbill.amount=amount
-        createbill.pending_amount=pending_amount
-        createbill.subtotal=subtotal
         createbill.task=task        
 
         # createbill = Bill(
@@ -287,3 +305,68 @@ def pendingadmin(request):
         'paginator': paginator
     }
     return render(request,'banasadmin/pendingadmin.html',context)
+
+def manageuser(request):
+    data = Customer.objects.all().order_by('-id')
+
+    paginator = Paginator(data, 5, orphans=0)
+
+    is_paginated = True if paginator.num_pages > 1 else False
+    page = request.GET.get('page') or 1
+    try:
+        current_page = paginator.page(page)
+        # except:
+    except InvalidPage as e:
+        messages.error(request, str(e))
+        current_page = paginator.page(1)
+
+        # context = {
+        #     'pending_tasks': pending_tasks,
+        # }
+
+    data = Customer.objects.all()
+    context = {
+        'current_page': current_page,
+        'is_paginated': is_paginated,
+        'paginator': paginator,
+        'data' : data
+    }
+    return render(request,'banasadmin/manageuser.html',context)
+
+def updateuser(request,pk):
+    if request.method == 'POST':
+        name = request.POST['name']
+        phone_no = request.POST['phoneno']
+        email = request.POST['email']
+        pwd = request.POST['pwd']
+        pwd1 = request.POST['pwd1']
+
+        updatedata = Customer.objects.get(pk=pk)
+
+        updatedata.name = name
+        updatedata.phone_no = phone_no
+        updatedata.email = email
+        updatedata.pwd = pwd
+        updatedata.pwd1 = pwd1
+
+        updatedata.save()
+
+        return redirect('manageuser')
+
+    data = Customer.objects.get(pk=pk)
+    context = {
+        'data' : data
+    }
+    return render(request,'banasadmin/updateuser.html',context)
+
+def delete(request,pk):
+    data = Customer.objects.get(pk=pk)
+    if request.method == 'POST':
+        data.delete()
+        return redirect('manageuser')
+   
+    context = {
+        'data':data
+    }
+    return render(request,'banasadmin/deleteuser.html',context)
+    

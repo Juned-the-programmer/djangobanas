@@ -7,7 +7,7 @@ class DailyEntryDisplay(ImportExportModelAdmin):
     list_display_links = ['name']
 
 class CustomerDisplay(ImportExportModelAdmin):
-    list_display=['name','phone_no','route']
+    list_display=['name','phone_no']
 
 class BillDisplay(ImportExportModelAdmin):
     list_display=['name','subtotal']

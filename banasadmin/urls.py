@@ -8,5 +8,8 @@ urlpatterns = [
     path('paybill/<pk>', views.paybill, name="paybill"),
     path('paidbilladmin/', views.paidbilladmin, name="paidbilladmin"),
     path('pendingadmin/', views.pendingadmin, name="pendingadmin"),
-    path('dailyentryadmin/', views.dailyentryadmin, name="dailyentryadmin")
+    path('dailyentryadmin/', views.dailyentryadmin, name="dailyentryadmin"),
+    path('manageuser/',views.manageuser,name='manageuser'),
+    path('updateuser/<pk>',views.updateuser,name='updateuser'),
+    path('delete/<pk>',views.delete,name='delete')
 ]

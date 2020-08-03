@@ -24,6 +24,14 @@
           <i class="fas fa-plus"></i> &nbsp;ADD USER</a>
        </div>
        <div class="col-md-4">
+         <a href="{% url 'manageuser' %}" class="btn btn-success d-block font-weight-bold mb-3">
+          <i class="fas fa-plus"></i> &nbsp;MANAGE USER</a>
+       </div>
+        <div class="col-md-4">
+         <a href="{% url 'billadmin' %}" class="btn btn-success d-block font-weight-bold mb-3">
+          <i class="fas fa-plus"></i> &nbsp;DASHBOARD</a>
+       </div>
+       <div class="col-md-4">
        <form class="form-inline my-2 my-lg-0" method="GET">
        {% csrf_token %}
         <input class="form-control mr-sm-2" type="text" placeholder="Search" value="{{request.get.q}}" aria-label="Search" name="q">

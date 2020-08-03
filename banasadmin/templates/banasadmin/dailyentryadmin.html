@@ -14,7 +14,7 @@
             <form class="form-inline" method="post">
             {% csrf_token %}
                 <div class="form-group">
-                    <select class="form-control">
+                    <select class="form-control" name="name">
                     {% for a in data%}
                         <option value="{{a.name}}">
                         {{a.name}}
@@ -27,5 +27,68 @@
             </form>
         </div>
     </div>
+
+    <div class="container mt-5">
+
+    <nav aria-label="breadcrumb" class="mb-4 ">
+        <ol class="breadcrumb  bg-dark" style="height: 53px;">
+          <li class="breadcrumb-item active text-white " aria-current="page">
+          {% block table_title %}
+          TODAYS ORDERS
+          {% endblock table_title %}
+          <li class="breadcrumb-item">
+          
+          </li>
+        </ol>
+
+ 
+      </nav>
+    <div class="table-responsive">
+    <table class="table table-striped thead-dark table-bordered table">
+        <thead class="thead-dark">
+          <tr>
+{% block table_header %}
+    <th>#</th>
+    <th>NAME</th>
+    <th>COOLER</th>
+    <th>DATE</th>
+{% endblock table_header %}
+          </tr>
+        </thead>
+        <tbody>
+            {% for a in current_page %}
+          <tr>
+{% block table_data %}
+    <td>{{ current_page.start_index|add:forloop.counter0 }}</td>
+    <td>{{a.name}}</td>
+    <td>{{a.cooler}}</td>
+    <td>{{a.date_added}}</td>
+{% endblock table_data %}
+
+          </tr>
+          {% endfor %}
+         </tbody>
+      </table>
+    </div>
+      {% if is_paginated %}
+      <nav class="my-5">
+        <ul class="pagination ">
+          {% if current_page.has_previous %}
+          <li class="page-item "><a class="page-link" href="?page=1">First</a></li>
+          <li class="page-item "><a class="page-link" href="?page={{ current_page.previous_page_number }}"><<</a></li>
+          {% endif %}
+          {% for page in paginator.page_range %}
+          <li class="page-item {% if page == current_page.number %}active{% endif %}">
+            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+          </li>
+          {% endfor %}
+          {% if current_page.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ current_page.next_page_number }}">>></a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ current_page.paginator.num_pages }}">Last</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+  {% endif %}
+</div>
 
 {% endblock content %}

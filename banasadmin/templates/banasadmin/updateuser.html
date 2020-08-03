@@ -1,0 +1,57 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Update User
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5"></div>
+<div class="row mx-1 my-1">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                UPDATE USER
+            </div>
+            <div class="card-body m-3">
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">NAME</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{data.name}}" placeholder="Enter the Name Here">
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneno">PHONE NO</label>
+                        <input type="tel" class="form-control" id="phoneno" name="phoneno" value="{{data.phone_no}}" placeholder="Enter the phoneno" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">EMAIL</label>
+                        <input type="text" class="form-control" id="email" name="email" value="{{data.email}}" placeholder="Enter the phoneno" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="name">USERNAME</label>
+                        <input type="text" class="form-control" id="username" name="username" value="{{data.user}}" placeholder="Enter the User Name Here">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">PASSWORD</label>
+                        <input type="password" class="form-control" id="pwd" name="pwd" value="{{data.pwd}}" placeholder="Enter the password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd1">REPEAT PASSWORD</label>
+                        <input type="password" class="form-control" id="pwd1" name="pwd1" value="{{data.pwd1}}" placeholder="Enter the re-password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Update User</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Delete User
+{% endblock title %}
+
+{% block content %}
+
+<br><br>
+<!-- Jumbotron -->
+<div class="jumbotron text-center container">
+
+  <!-- Title -->
+  <h2 class="card-title h2">Delete User</h2>
+  <!-- Subtitle -->
+  <p class="blue-text my-4 font-weight-bold">Are you sure you want to delete {{data.name}}</p>
+
+  <!-- Grid row -->
+  <div class="row d-flex justify-content-center">
+
+    <!-- Grid column -->
+    
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+  <hr class="my-4">
+    <form method="POST">
+    {% csrf_token %}
+  <div class="pt-2">
+    <button type="submit" class="btn btn-outline-primary waves-effect">Delete User</button>
+    <a href="{% url 'manageuser' %}"><button type="button" class="btn btn-outline-primary waves-effect">Cancel</button></a>
+  </div>
+    </form>
+</div>
+<!-- Jumbotron -->
+{% endblock content %}

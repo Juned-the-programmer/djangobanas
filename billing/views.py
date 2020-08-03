@@ -20,6 +20,7 @@ def dailyentry(request):
     lastmonth = first - datetime.timedelta(days=31)
     lstmonth = lastmonth.strftime("%Y-%m-%d")
     print(lstmonth)
+    
     if User.is_authenticated:
         user = request.user.username 
         print(user)
@@ -57,11 +58,11 @@ def dailyentry(request):
         hour = h.time()
         d = hour.hour
         print(hour)
-
-        if d in range(6,18):
-            dailyEntry.save()
-        else:
-            messages.error(request, 'Now you cannnot do entry on this')
+        dailyEntry.save()
+        # if d in range(6,18):
+        #     dailyEntry.save()
+        # else:
+        #     messages.error(request, 'Now you cannnot do entry on this')
     return render(request,'billing/dailyentry.html',context)
 
 @login_required(login_url='login')
