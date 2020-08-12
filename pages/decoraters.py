@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.shortcuts import redirect
 
 def unauthenticated_user(view_func):
@@ -18,7 +19,7 @@ def allowed_users(allowed_roles=[]):
             if group in allowed_roles:
                 return view_fuc(request,*args, **kwargs)
             else:
-                return HttpResponse('YOU ARE NOT AUTHORISED')
+                return render(request,'pages/404page.html')
         return wrapper_func
     return decorator
 
