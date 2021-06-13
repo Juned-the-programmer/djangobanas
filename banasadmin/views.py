@@ -9,6 +9,8 @@ from django.db.models import Q
 from django.db.models import Sum,Min,Max,Avg
 from datetime import datetime,date
 import datetime
+import requests
+import json
 # Create your views here.
 
 @login_required(login_url='login')
@@ -131,6 +133,7 @@ def addcustomer(request):
             AddBill.save()
             AddCustomer.save()
             return redirect('billadmin')
+            
     return render(request, 'banasadmin/addcustomer.html')
 
 
@@ -185,16 +188,21 @@ def paybill(request,pk):
             pay = paidamount,
             pending = BILL.pending_amount
         )
-        # response = sendPostRequest(URL, 'U8YZP19ED1QO5X23W0WQAS7TLW31KRMM', 'YHOFLS7O140FA1CL', 'prod', phone , 'banas water', 'DEAR '+name+' YOUR TOTAL AMOUNT OF BILL IS '+amount+' FROM THAT YOU HAVE PAID '+paidamount+' YOUR TOTAL PENDING AMOUNT IS THANKS FROM WITH ME..' )
-        # account_sid = 'AC456e86e5e5b54f793c12db6ee162de70'
-        # auth_token = '6654606e64429cddd07aa2b0d8525d84'
-        # client = Client(account_sid, auth_token)
-        # message = client.messages \
-        #         .create(
-        #              body='DEAR '+name+' YOUR TOTAL AMOUNT OF BILL IS '+amount+' FROM THAT YOU HAVE PAID '+paidamount+' YOUR TOTAL PENDING AMOUNT IS THANKS FROM WITH ME..',
-        #              from_='+12057367667',
-        #              to='+91'+phone
-        #          )
+
+        URL = 'https://www.sms4india.com/api/v1/sendCampaign'
+
+        # get request
+        def sendPostRequest(reqUrl, apiKey, secretKey, useType, phoneNo, senderId, textMessage):
+            req_params = {
+            'apikey':apiKey,
+            'secret':secretKey,
+            'usetype':useType,
+            'phone': phoneNo,
+            'message':textMessage,
+            'senderid':senderId
+            }
+            return requests.post(reqUrl, req_params)
+        response = sendPostRequest(URL, '613Q6DIAGCGM71GBD867XGL3CUWNGZ0V', 'MOKA83CFKYQDPMR5', 'prod', phone , 'banas water', 'DEAR '+name+' YOUR TOTAL AMOUNT OF BILL IS  '+amount+' FROM THAT YOU HAVE PAID '+paidamount+' YOUR TOTAL PENDING AMOUNT IS THANKS FROM WITH ME..' )
         paidbill.save()
         BILL.save()
         messages.success(request,'Paid successsfully')
